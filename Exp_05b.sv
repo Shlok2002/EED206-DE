@@ -1,4 +1,4 @@
-module Experiment5a(); // Decryption circuit
+module Experiment5b(); // Decryption circuit
 
 //Declaring general variables
 
@@ -35,7 +35,7 @@ Decryption_circuit Decrypt(P,Q,R,S,D,C,B,A);
 	Q = in[1];
 	R = in[2];
 	S = in[3];
-	 
+
 #5
  	out[0] = D;
 	out[1] = C;
@@ -100,5 +100,4 @@ module Decryption_circuit(P,Q,R,S,D,C,B,A);
 		n4(SN,S);
 
 endmodule
-
 
