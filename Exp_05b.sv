@@ -57,47 +57,27 @@ endmodule  //End of Testbench
 
 //DESIGN - DECRYPTION CIRCUIT
 
-module and_4in(and4_out,a,b,c,d); //4_input AND gate
-   	input a,b,c,d;
-  	wire t1,t2;
-   	output and4_out;
-
-   	and	and1(t1,a,b),
-       		and2(t2,c,d),
-      		and3(and4_out,t1,t2);
-endmodule // End of 4-input AND gate module
-
-module or_4in(or4_out,a,b,c,d); //4_input OR gate
-   	input a,b,c,d;
-  	wire t1,t2;
-   	output or4_out;
-
-   	or	and1(t1,a,b),
-       		and2(t2,c,d),
-		and3(or4_out,t1,t2);
-endmodule // End of 4-input OR gate module
-
 module Decryption_circuit(P,Q,R,S,D,C,B,A);
 	input P,Q,R,S;
 	wire w1,w2,w3,w4,w5,w6,w7,PN,QN,RN,SN;
 	output D,C,B,A;
-
-	and_4in an1(w1,PN,RN,S,1'b1),
-	an2(w3,PN,RN,SN,1'b1);
 	
-	or_4in or1(C,w3,w4,w5,1'b0),
-	or2(B,w3,w6,w7,1'b0);
-	and	a1(w2,Q,R),
-	a2(w4,PN,QN),
-	a3(w5,QN,RN),
-	a4(w6,P,R),
-	a5(w7,R,S);
+	and	a1(w1,PN,RN,S),
+		a2(w2,Q,R),
+		a3(w3,PN,RN,SN),
+		a4(w4,PN,QN),
+		a5(w5,QN,RN),
+		a6(w6,P,R),
+		a7(w7,R,S);
+
 	or	o1(D,w1,w2),
-	o2(A,SN,1'b0);
+		o2(C,w3,w4,w5),
+		o3(B,w3,w6,w7),
+		o4(A,SN);
+
 	not	n1(PN,P),
 		n2(QN,Q),
 		n3(RN,R),
 		n4(SN,S);
 
 endmodule
-
