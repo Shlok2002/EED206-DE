@@ -54,25 +54,15 @@ endmodule  //End of Testbench
 
 //DESIGN - DIVISION CIRCUIT
 
-module and_4in(and4_out,a,b,c,d); //4_input AND gate
-   	input a,b,c,d;
-  	wire t1,t2;
-   	output and4_out;
-
-   	and	and1(t1,a,b),
-       		and2(t2,c,d),
-      		and3(and4_out,t1,t2);
-endmodule // End of 4-input AND gate module
-
 module Division_circuit (N1,N0,D1,D0,Q1,Q0,R1,R0);
 	input N1,N0,D1,D0;
 	wire w1,w2,w3,N1N,N0N,D1N,D0N;
 	output Q1,Q0,R1,R0;
 
-	and_4in an1(R1,N1,N0N,D1,D0),
-		an2(R0,w3,N0,D1,1'b1);
 	and 	a1(Q1,N1,D1N),
-		a2(Q0,w1,w2);
+		a2(Q0,w1,w2),
+		a3(R1,N1,N0N,D1,D0),
+		a4(R0,w3,N0,D1);
 	or	o1(w1,N0,D0N),
 		o2(w2,N1,D1N),
 		o3(w3,N1N,D0N);
@@ -81,6 +71,4 @@ module Division_circuit (N1,N0,D1,D0,Q1,Q0,R1,R0);
 		n3(D1N,D1),
 		n4(D0N,D0);
 endmodule
-		
-	
 
