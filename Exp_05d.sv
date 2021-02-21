@@ -79,24 +79,26 @@ endmodule // End of 4-input OR gate module
 
 module Decoder_circuit(G3,G2,G1,G0,D,C,B,A);
 	input G3,G2,G1,G0;
-	wire w1,w2,w3,w4,w5,w6,w7,w8,G3N,G2N,G1N,G0N;
+	wire w1,w2,w3,w4,w5,w6,w7,G3N,G2N,G1N,G0N;
 	output D,C,B,A;
 
-	and_4in an1(D,G3,G1,G0N,1'b1),
-		an2(w8,w3,w4,w5,w6);
-	or_4in 	or1(w3,G3N,G2N,G1N,G0),
-		or2(w4,G3N,G1,G0N,1'b0),
-		or3(w5,G3,G1,G0,1'b0),
-		or4(w7,G3,G1N,G0N,1'b0);
-	and 	a1(C,w1,w2),
-		a2(B,G0,1'b1),
-		a3(A,w8,w7);
+
+
+	and	a1(D,G3,G1,G0N),
+		a2(C,w1,w2),
+		a3(B,G0),
+		a4(A,w3,w4,w5,w6,w7);
+
 	or	o1(w1,G1N,G0),
 		o2(w2,G3,G0N),
-		o3(w6,G3,G2);
+		or1(w3,G3N,G2N,G1N,G0),
+		or2(w4,G3N,G1,G0N),
+		or3(w5,G3,G1,G0),
+		o3(w6,G3,G2),
+		or4(w7,G3,G1N,G0N);
+
 	not	n1(G3N,G3),
 		n2(G2N,G2),
 		n3(G1N,G1),
 		n4(G0N,G0);
 endmodule
-		
