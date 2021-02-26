@@ -111,7 +111,7 @@ module MUX_4input_1bit(Cout_inc,Cout_dec,Cout_add,Cout_sub,sel1,sel0,enbar,Carry
   input Cout_inc,Cout_dec,Cout_add,Cout_sub,sel1,sel0,enbar;
   output Carry;
 
-  assign Carry = enbar?1’b0:(sel1?(sel0?Cout_sub:Cout_add):(sel0?Cout_dec:Cout_inc));
+  assign Carry = enbar?1'b0:(sel1?(sel0?Cout_sub:Cout_add):(sel0?Cout_dec:Cout_inc));
 endmodule
 
 module MUX_8input_4bit(not4b,and4b,or4b,xor4b,inc4b,dec4b,add4b,sub4b,sel2,sel1,sel0,enbar,dutout[3:0]);
@@ -119,5 +119,5 @@ module MUX_8input_4bit(not4b,and4b,or4b,xor4b,inc4b,dec4b,add4b,sub4b,sel2,sel1,
   input sel2,sel1,sel0,enbar;
   output [3:0] dutout;
 
-  assign dutout = enbar?4’b0:(sel2?(sel1?(sel0?sub4b:add4b):(sel0?dec4b:inc4b)):(sel1?(sel0?xor4b:or4b):(sel0?and4b:not4b)));
+  assign dutout = enbar?4'b0:(sel2?(sel1?(sel0?sub4b:add4b):(sel0?dec4b:inc4b)):(sel1?(sel0?xor4b:or4b):(sel0?and4b:not4b)));
 endmodule
