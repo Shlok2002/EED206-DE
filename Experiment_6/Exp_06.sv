@@ -87,7 +87,7 @@ endmodule  //End of Top Module
 
 module Logic_4bit(A,B,not4b,and4b,or4b,xor4b);
   input [3:0] A,B;
-  output [4:0] not4b,and4b,or4b,xor4b;
+  output [3:0] not4b,and4b,or4b,xor4b;
 
   assign not4b = ~A;
   assign and4b = A & B;
