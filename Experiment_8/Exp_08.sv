@@ -105,4 +105,23 @@ D_FF ff3(D[3],Q[3],Q_prev[3],clk,clk_prev,Rd,Sd);
 endmodule
 
 module ALU(A,B,sel,Y,CO);
+input [3:0] A,B;
+input [2:0] sel;
+output [3:0] Y;
+output CO;
+wire [3:0] not4b,and4b,or4b,xor4b,inc4b,dec4b,add4b,sub4b,Cout_inc,Cout_dec,Cout_add,Cout_sub;
+
+  assign not4b = ~A;
+  assign and4b = A & B;
+  assign or4b = A | B;
+  assign xor4b = A ^ B;
+  assign {Cout_inc, inc4b} = A + 1'b1;
+  assign {Cout_dec, dec4b} = A - 1'b1;
+  assign {Cout_add, add4b} = A + B;
+  assign {Cout_sub, sub4b} = A - B;
+
+  assign CO = sel[2]?(sel[1]?(sel[0]?Cout_sub:Cout_add):(sel[0]?Cout_dec:Cout_inc)):1'b0;
+  assign Y = sel[2]?(sel[1]?(sel[0]?sub4b:add4b):(sel[0]?dec4b:inc4b)):(sel[1]?(sel[0]?xor4b:or4b):(sel[0]?and4b:not4b));
+endmodule;
+
 
